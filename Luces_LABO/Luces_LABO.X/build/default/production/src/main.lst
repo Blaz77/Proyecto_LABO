@@ -1,0 +1,307 @@
+CCS PCM C Compiler, Version 5.015, 5967               16-nov.-17 00:47
+
+               Filename:   D:\_PIC\Luces_LABO\Luces_LABO.X\build\default\production\src\main.lst
+
+               ROM used:   190 words (9%)
+                           Largest free fragment is 1858
+               RAM used:   14 (6%) at main() level
+                           14 (6%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include "main.h" 
+.................... #include <16F628A.h> 
+.................... //////////// Standard Header file for the PIC16F628A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F628A 
+....................  
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES INTRC_IO              	//Internal RC Osc, no CLKOUT 
+.................... #FUSES PUT                   	//Power Up Timer 
+.................... #FUSES NOPROTECT             	//Code not protected from reading 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOMCLR                	//Master Clear pin used for I/O 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                 	//No EE protection 
+....................  
+.................... #use delay(clock=4000000) 
+0004:  MOVLW  28
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................  
+.................... #define P_MAS   pin_a2 
+.................... #define P_MENOS pin_a3 
+....................  
+.................... #define PWM     pin_b3 
+.................... #define S_LED2  pin_b2 
+....................  
+....................  
+.................... void main() 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  BSF    03.5
+001D:  BSF    0E.3
+001E:  MOVLW  07
+001F:  BCF    03.5
+0020:  MOVWF  1F
+0021:  BCF    03.7
+0022:  CLRF   21
+0023:  CLRF   22
+0024:  MOVLW  14
+0025:  MOVWF  23
+0026:  CLRF   24
+0027:  MOVWF  25
+0028:  BCF    26.0
+0029:  BCF    26.1
+002A:  CLRF   27
+.................... { 
+.................... 	int i=0, d=0; 
+.................... 	int Periodo = 20; // decimilisegundos 
+.................... 	int Activo = 0; 
+.................... 	int Inactivo = 20; 
+.................... 	short Mas=0, Menos=0; 
+....................     int cant_periodos = 0; // 1 periodo = 2 ms 
+.................... 	 
+.................... 	 
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+002B:  BSF    03.5
+002C:  MOVF   01,W
+002D:  ANDLW  C7
+002E:  IORLW  08
+002F:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+0030:  BCF    03.5
+0031:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0032:  MOVLW  00
+0033:  MOVWF  78
+0034:  MOVWF  12
+0035:  MOVLW  00
+0036:  BSF    03.5
+0037:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+0038:  MOVLW  07
+0039:  BCF    03.5
+003A:  MOVWF  1F
+003B:  BSF    03.5
+003C:  MOVF   05,W
+003D:  MOVWF  05
+003E:  MOVLW  02
+003F:  MOVWF  77
+0040:  DECFSZ 77,F
+0041:  GOTO   040
+0042:  GOTO   043
+0043:  NOP
+0044:  BCF    03.5
+0045:  MOVF   1F,W
+0046:  BCF    0C.6
+....................    setup_vref(FALSE); 
+0047:  BSF    03.5
+0048:  CLRF   1F
+.................... //Setup_Oscillator parameter not selected from Intr Oscillator Config tab 
+....................  
+.................... 	while(TRUE) { 
+.................... 		if (Activo == 0) { 
+0049:  BCF    03.5
+004A:  MOVF   24,F
+004B:  BTFSS  03.2
+004C:  GOTO   057
+.................... 			output_low(PWM); 
+004D:  BSF    03.5
+004E:  BCF    06.3
+004F:  BCF    03.5
+0050:  BCF    06.3
+.................... 			delay_ms(50); 
+0051:  MOVLW  32
+0052:  MOVWF  28
+0053:  CALL   004
+....................             cant_periodos += 25; 
+0054:  MOVLW  19
+0055:  ADDWF  27,F
+.................... 		} 
+0056:  GOTO   08E
+.................... 		else if (Activo == Periodo) { 
+0057:  MOVF   23,W
+0058:  SUBWF  24,W
+0059:  BTFSS  03.2
+005A:  GOTO   065
+.................... 			output_high(PWM); 
+005B:  BSF    03.5
+005C:  BCF    06.3
+005D:  BCF    03.5
+005E:  BSF    06.3
+.................... 			delay_ms(50); 
+005F:  MOVLW  32
+0060:  MOVWF  28
+0061:  CALL   004
+....................             cant_periodos += 25; 
+0062:  MOVLW  19
+0063:  ADDWF  27,F
+.................... 		} 
+0064:  GOTO   08E
+.................... 		else { 
+....................             // 25 periodos = 50ms aprox 
+.................... 			for (i=0; i <25; i++) { 
+0065:  CLRF   21
+0066:  MOVF   21,W
+0067:  SUBLW  18
+0068:  BTFSS  03.0
+0069:  GOTO   08C
+.................... 				output_high(PWM); 
+006A:  BSF    03.5
+006B:  BCF    06.3
+006C:  BCF    03.5
+006D:  BSF    06.3
+.................... 				for (d=0; d<Activo; d++) { 
+006E:  CLRF   22
+006F:  MOVF   24,W
+0070:  SUBWF  22,W
+0071:  BTFSC  03.0
+0072:  GOTO   07A
+.................... 					delay_us(93); 
+0073:  MOVLW  1E
+0074:  MOVWF  77
+0075:  DECFSZ 77,F
+0076:  GOTO   075
+0077:  GOTO   078
+0078:  INCF   22,F
+0079:  GOTO   06F
+.................... 				} 
+.................... 				output_low(PWM); 
+007A:  BSF    03.5
+007B:  BCF    06.3
+007C:  BCF    03.5
+007D:  BCF    06.3
+.................... 				for (d=0; d<Inactivo; d++) { 
+007E:  CLRF   22
+007F:  MOVF   25,W
+0080:  SUBWF  22,W
+0081:  BTFSC  03.0
+0082:  GOTO   08A
+.................... 					delay_us(93); 
+0083:  MOVLW  1E
+0084:  MOVWF  77
+0085:  DECFSZ 77,F
+0086:  GOTO   085
+0087:  GOTO   088
+0088:  INCF   22,F
+0089:  GOTO   07F
+.................... 				} 
+008A:  INCF   21,F
+008B:  GOTO   066
+.................... 			} 
+....................             cant_periodos += 25; 
+008C:  MOVLW  19
+008D:  ADDWF  27,F
+.................... 		} 
+.................... 		Mas = input(P_MAS); 
+008E:  BSF    03.5
+008F:  BSF    05.2
+0090:  BCF    03.5
+0091:  BCF    26.0
+0092:  BTFSC  05.2
+0093:  BSF    26.0
+.................... 		Menos = input(P_MENOS); 
+0094:  BSF    03.5
+0095:  BSF    05.3
+0096:  BCF    03.5
+0097:  BCF    26.1
+0098:  BTFSC  05.3
+0099:  BSF    26.1
+.................... 		if (Mas == 1 && Menos == 1) { 
+009A:  BTFSS  26.0
+009B:  GOTO   09E
+009C:  BTFSC  26.1
+.................... 			 
+.................... 		} 
+009D:  GOTO   0B2
+.................... 		else if (Mas == 1) { 
+009E:  BTFSS  26.0
+009F:  GOTO   0A9
+.................... 			if (Activo < Periodo) { 
+00A0:  MOVF   23,W
+00A1:  SUBWF  24,W
+00A2:  BTFSC  03.0
+00A3:  GOTO   0A8
+.................... 				Activo++; 
+00A4:  INCF   24,F
+.................... 				Inactivo = Periodo - Activo; 
+00A5:  MOVF   24,W
+00A6:  SUBWF  23,W
+00A7:  MOVWF  25
+.................... 			} 
+.................... 		} 
+00A8:  GOTO   0B2
+.................... 		else if (Menos == 1) { 
+00A9:  BTFSS  26.1
+00AA:  GOTO   0B2
+.................... 			if (Activo > 0) { 
+00AB:  MOVF   24,F
+00AC:  BTFSC  03.2
+00AD:  GOTO   0B2
+.................... 				Activo--; 
+00AE:  DECF   24,F
+.................... 				Inactivo = Periodo - Activo; 
+00AF:  MOVF   24,W
+00B0:  SUBWF  23,W
+00B1:  MOVWF  25
+.................... 			} 
+.................... 		} 
+....................          
+....................         if (cant_periodos >= 200) { 
+00B2:  MOVF   27,W
+00B3:  SUBLW  C7
+00B4:  BTFSC  03.0
+00B5:  GOTO   0BC
+....................             output_toggle(S_LED2); 
+00B6:  BSF    03.5
+00B7:  BCF    06.2
+00B8:  MOVLW  04
+00B9:  BCF    03.5
+00BA:  XORWF  06,F
+....................             cant_periodos = 0; 
+00BB:  CLRF   27
+....................         } 
+00BC:  GOTO   04A
+.................... 	}	 
+....................  
+.................... } 
+00BD:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F10   NOWDT PUT INTRC_IO NOMCLR NOBROWNOUT NOLVP NOCPD NOPROTECT
