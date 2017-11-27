@@ -12,8 +12,8 @@
  short est_nivel_min = IN_OFF;
  short est_nivel_max = IN_OFF;
  short est_boton_ciclo = IN_OFF;
- short est_boton_centri = IN_OFF;
- short est_pausa = IN_OFF;
+ //short est_boton_centri = IN_OFF;
+ //short est_pausa = IN_OFF;
  tipoPrograma programa = EN_ESPERA;
  etapaPrograma etapa = TERMINADO;
  etapaGiro giro = GIRO_ANTIHOR;
@@ -29,8 +29,8 @@ void ScanEntradas()
     est_nivel_min = input(E_NIVEL_MIN);
     est_nivel_max = input(E_NIVEL_MAX);
     est_boton_ciclo = input(E_BOTON_CICLO);
-    est_boton_centri = input(E_BOTON_CENTRI);
-    est_pausa = input(E_PAUSA);
+    //est_boton_centri = input(E_BOTON_CENTRI);
+    //est_pausa = input(E_PAUSA);
 }
 
 void ResetTiempos()
@@ -58,11 +58,11 @@ void DefinirPrograma()
             programa = CICLO_NORMAL;
             etapa = CARGA_LAVADO;
         }
-        else if (est_boton_centri == IN_ON) {
-            PrepararCentrifugado();
-            programa = CENTRIFUGADO;
-            etapa = CENTRI_FINAL;
-        }
+//        else if (est_boton_centri == IN_ON) {
+//            PrepararCentrifugado();
+//            programa = CENTRIFUGADO;
+//            etapa = CENTRI_FINAL;
+//        }
     }
     
 }
@@ -270,33 +270,33 @@ void GenerarAlarma()
     output_bit(S_ALARMA, OUT_OFF);
 }
 
-void PausarCiclo()
-{
-    output_bit(S_CARGA_LAVADO, OUT_OFF);
-    output_bit(S_CARGA_ENJUAG, OUT_OFF);
-    output_bit(S_GIRO_IZQ, OUT_OFF);
-    output_bit(S_GIRO_DER, OUT_OFF);
-    output_bit(S_GIRO_CENTRI, OUT_OFF);
-    
-    for (int i=0; i<3; i++) {
-        output_bit(S_ALARMA, OUT_ON);
-        delay_ms(800);
-        output_bit(S_ALARMA, OUT_OFF);
-        delay_ms(800);
-    }
-    while (input(E_PAUSA) != IN_OFF) {
-        delay_ms(200);
-    }
-    while (input(E_PAUSA) != IN_ON) {
-        delay_ms(200);
-    }
-    while (input(E_PAUSA) != IN_OFF) {
-        delay_ms(200);
-    }
-    if (etapa == CENTRI_LAVADO || etapa == CENTRI_FINAL) {
-        PrepararCentrifugado();
-    }
-}
+//void PausarCiclo()
+//{
+//    output_bit(S_CARGA_LAVADO, OUT_OFF);
+//    output_bit(S_CARGA_ENJUAG, OUT_OFF);
+//    output_bit(S_GIRO_IZQ, OUT_OFF);
+//    output_bit(S_GIRO_DER, OUT_OFF);
+//    output_bit(S_GIRO_CENTRI, OUT_OFF);
+//    
+//    for (int i=0; i<3; i++) {
+//        output_bit(S_ALARMA, OUT_ON);
+//        delay_ms(800);
+//        output_bit(S_ALARMA, OUT_OFF);
+//        delay_ms(800);
+//    }
+//    while (input(E_PAUSA) != IN_OFF) {
+//        delay_ms(200);
+//    }
+//    while (input(E_PAUSA) != IN_ON) {
+//        delay_ms(200);
+//    }
+//    while (input(E_PAUSA) != IN_OFF) {
+//        delay_ms(200);
+//    }
+//    if (etapa == CENTRI_LAVADO || etapa == CENTRI_FINAL) {
+//        PrepararCentrifugado();
+//    }
+//}
 
 void main()
 {
@@ -306,10 +306,11 @@ void main()
 	setup_comparator(NC_NC_NC_NC);
 	setup_vref(FALSE);
     
-    set_tris_a(0b11111111);
+    set_tris_a(0b11110111);
 	set_tris_b(0b00000000);
     
-    output_a(0x00);
+    output_low(PIN_TXD);
+    //output_a(0x00);
 	output_b(0b11111111);
     
 	disable_interrupts(INT_EXT);
@@ -324,11 +325,12 @@ void main()
     output_bit(S_FIN, OUT_ON);
     while(TRUE)
     {
+        
         ScanEntradas();
         if (activar_alarma)
             GenerarAlarma();
-        if (est_pausa == IN_ON && programa != EN_ESPERA)
-            PausarCiclo();
+//        if (est_pausa == IN_ON && programa != EN_ESPERA)
+//            PausarCiclo();
         DefinirPrograma();
         if (programa == EN_ESPERA) {
             MantenerEspera();
@@ -343,6 +345,7 @@ void main()
             delay_ms(150);
         }
         else {
+            putc('A');
             delay_ms(999);
             if (reset_tiempo) {
                 ResetTiempos();

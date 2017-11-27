@@ -16,9 +16,9 @@
 #FUSES NOBROWNOUT               //No brownout reset
 #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
 #FUSES NOCPD                    //No EE protection
-#FUSES PROTECT                  //Code protected from reads
+#FUSES NOPROTECT                  //Code protected from reads
 
-#use fast_io(a)
+//#use fast_io(a)
 #use fast_io(b)
 #use delay(internal=4000000)
 
@@ -32,8 +32,11 @@
 #define E_NIVEL_MIN     pin_a6
 #define E_NIVEL_MAX     pin_a7
 #define E_BOTON_CICLO   pin_a0
-#define E_BOTON_CENTRI  pin_a1
-#define E_PAUSA         pin_a3
+//#define E_BOTON_CENTRI  pin_a1
+#define PIN_TEMP        pin_a1
+//#define E_PAUSA         pin_a3
+#define PIN_TXD         pin_a3
+#define PIN_RXD         pin_a4
 
 #define S_ALARMA        pin_b7
 #define S_CARGA_LAVADO  pin_b6
@@ -55,6 +58,8 @@
 #define T_CENTRI_FINAL  4       //minutos
 #define PARADA_CENTRI   10      //segundos
 
+
+#use rs232(baud=9600,parity=N,xmit=PIN_TXD,rcv=PIN_RXD,bits=8)
 
 enum tipoPrograma {
     EN_ESPERA, CICLO_NORMAL, CENTRIFUGADO
