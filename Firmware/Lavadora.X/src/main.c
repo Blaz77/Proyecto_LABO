@@ -10,6 +10,10 @@
 #include <1wire.c>
 #include <ds1820.c>
 
+// Variables configurables
+int TIEMPO_GIRO = 1;		// segundos
+int CARGA_TIMEOUT = 1;		// minutos
+
 // Variables de estado
  short est_resetalarma = IN_OFF;
  short est_nivel_min = IN_OFF;
@@ -166,10 +170,10 @@ void EjecutarCicloNormal()
             ResetTiempos();
             PrepararCentrifugado();
             output_bit(S_GIRO_CENTRI, OUT_ON);
-            etapa = CENTRI_LAVADO;
+            etapa = CENTRI_FINAL;
         }
     }
-    else if (etapa == CENTRI_LAVADO) {
+    /* else if (etapa == CENTRI_LAVADO) {
         output_bit(S_GIRO_CENTRI, OUT_ON);
         if (minutos >= T_CENTRI_LAVADO) {
             output_bit(S_GIRO_CENTRI, OUT_OFF);
@@ -233,7 +237,7 @@ void EjecutarCicloNormal()
             output_bit(S_GIRO_CENTRI, OUT_ON);
             etapa = CENTRI_FINAL;
         }
-    }
+    } */
     else if (etapa == CENTRI_FINAL) {
         output_bit(S_GIRO_CENTRI, OUT_ON);
         if (minutos >= T_CENTRI_FINAL) {
@@ -325,6 +329,9 @@ void main()
     while (input(E_NIVEL_MAX) == IN_ON || input(E_NIVEL_MIN) == IN_ON)
         GenerarAlarma();
     
+	TIEMPO_GIRO = read_eeprom(EEPROM_TIEMPO_GIRO);
+	CARGA_TIMEOUT = read_eeprom(EEPROM_CARGA_TIMEOUT);
+	
     delay_ms(500);
     output_bit(S_FIN, OUT_ON);
     while(TRUE)
@@ -349,10 +356,10 @@ void main()
             delay_ms(150);
         }
         else {
-            out_data[O_TEMPERATURA] = 40;
-            out_data[O_ESTADO] = 2;
-            out_data[O_T_CARGA] = 180;
-            out_data[O_T_GIRO] = 10;
+            out_data[O_TEMPERATURA] = ds1820_read;
+            out_data[O_ESTADO] = etapa;
+            out_data[O_T_CARGA] = CARGA_TIMEOUT;
+            out_data[O_T_GIRO] = TIEMPO_GIRO;
             for (int i=0; i<4; i++) {
                 putc(out_data[i]);
             }

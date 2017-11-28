@@ -41,16 +41,17 @@
 
 #define S_ALARMA        pin_b7
 #define S_CARGA_LAVADO  pin_b6
-#define S_CARGA_ENJUAG  pin_b5
+#define S_CALENTADOR	pin_b5
+//#define S_CARGA_ENJUAG  pin_b5
 #define S_GIRO_IZQ      pin_b4
 #define S_GIRO_DER      pin_b3
 #define S_GIRO_CENTRI   pin_b2
 #define S_DESCARGA      pin_b1
 #define S_FIN           pin_b0
 
-#define TIEMPO_GIRO     15      //seg
+//#define TIEMPO_GIRO     15      //seg
 #define TIEMPO_DESACEL  3       //seg
-#define CARGA_TIMEOUT   7      //minutos
+//#define CARGA_TIMEOUT   7      //minutos
 #define CICLOS_LAVADO   18      //Un ciclo incluye ambos giros y desaceleraciones
 #define CICLOS_ENJUAG   12
 #define CICLOS_DESC_A   6       //Ciclos de descarga maximos previos al nivel minimo
@@ -59,6 +60,8 @@
 #define T_CENTRI_FINAL  4       //minutos
 #define PARADA_CENTRI   10      //segundos
 
+#define EEPROM_TIEMPO_GIRO		0
+#define EEPROM_CARGA_TIMEOUT 	1
 
 #use rs232(baud=9600,parity=N,xmit=PIN_TXD,rcv=PIN_RXD,bits=8)
 

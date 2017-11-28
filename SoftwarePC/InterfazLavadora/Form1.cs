@@ -20,7 +20,7 @@ namespace InterfazLavadora
     {
         private SerialPort comport = new SerialPort();
         private Color[] LogMsgTypeColor = { Color.Blue, Color.Green, Color.Black, Color.Orange, Color.Red };
-
+        private bool EnEdicion;
 
         private DataMode CurrentDataMode
         {
@@ -144,6 +144,19 @@ namespace InterfazLavadora
                 comport.Read(buffer, 0, bytes);
 
                 Log(LogMsgType.Incoming, ByteArrayToHexString(buffer));
+                if (!EnEdicion)
+                    FillData(buffer);
+            }
+        }
+
+        private void FillData(byte[] buffer)
+        {
+            if (buffer.Count() == 4)
+            {
+                txtTemperatura.Text = buffer[0].ToString() + " ºC";
+                txtTiempoGiro.Text = buffer[1].ToString() + " segundos";
+                txtTimeoutCarga.Text = buffer[2].ToString() + " minutos";
+                txtEstado.Text = buffer[3].ToString();
             }
         }
 
@@ -229,6 +242,18 @@ namespace InterfazLavadora
             int num;
 
             return SerialPort.GetPortNames().OrderBy(a => a.Length > 3 && int.TryParse(a.Substring(3), out num) ? num : 0).ToArray();
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkModificar_CheckedChanged(object sender, EventArgs e)
+        {
+            EnEdicion = chkModificar.Checked;
+            txtTiempoGiro.Enabled = EnEdicion;
+            txtTimeoutCarga.Enabled = EnEdicion;
         }
     }
 }

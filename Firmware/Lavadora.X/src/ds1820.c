@@ -23,7 +23,7 @@ float ds1820_read()
  temp3 = make16(temp2, temp1); 
   
  //result = (float) temp3 / 2.0;   //Calculation for DS18S20 with 0.5 deg C resolution 
- result = (float) temp3 / 16.0;  //Calculation for DS18B20 with 0.1 deg C resolution 
+ result = (int) temp3 / 16.0;  //Calculation for DS18B20 with 0.1 deg C resolution 
   
  return(result); 
 }

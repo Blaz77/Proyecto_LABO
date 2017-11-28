@@ -39,6 +39,16 @@
             this.lblSend = new System.Windows.Forms.Label();
             this.txtSendData = new System.Windows.Forms.TextBox();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTemperatura = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtTiempoGiro = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtTimeoutCarga = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtEstado = new System.Windows.Forms.TextBox();
+            this.btnEnviar = new System.Windows.Forms.Button();
+            this.chkModificar = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // tmrCheckComPorts
@@ -143,15 +153,112 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtfTerminal.Location = new System.Drawing.Point(12, 145);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(393, 135);
+            this.rtfTerminal.Size = new System.Drawing.Size(393, 68);
             this.rtfTerminal.TabIndex = 11;
             this.rtfTerminal.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(38, 239);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Temperatura";
+            // 
+            // txtTemperatura
+            // 
+            this.txtTemperatura.Enabled = false;
+            this.txtTemperatura.Location = new System.Drawing.Point(157, 236);
+            this.txtTemperatura.Name = "txtTemperatura";
+            this.txtTemperatura.Size = new System.Drawing.Size(112, 20);
+            this.txtTemperatura.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(38, 265);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Tiempo de giro";
+            // 
+            // txtTiempoGiro
+            // 
+            this.txtTiempoGiro.Location = new System.Drawing.Point(157, 262);
+            this.txtTiempoGiro.Name = "txtTiempoGiro";
+            this.txtTiempoGiro.Size = new System.Drawing.Size(112, 20);
+            this.txtTiempoGiro.TabIndex = 13;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(38, 291);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Timeout de carga";
+            // 
+            // txtTimeoutCarga
+            // 
+            this.txtTimeoutCarga.Location = new System.Drawing.Point(157, 288);
+            this.txtTimeoutCarga.Name = "txtTimeoutCarga";
+            this.txtTimeoutCarga.Size = new System.Drawing.Size(112, 20);
+            this.txtTimeoutCarga.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(38, 317);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Estado";
+            // 
+            // txtEstado
+            // 
+            this.txtEstado.Enabled = false;
+            this.txtEstado.Location = new System.Drawing.Point(157, 314);
+            this.txtEstado.Name = "txtEstado";
+            this.txtEstado.Size = new System.Drawing.Size(112, 20);
+            this.txtEstado.TabIndex = 13;
+            // 
+            // btnEnviar
+            // 
+            this.btnEnviar.Location = new System.Drawing.Point(289, 288);
+            this.btnEnviar.Name = "btnEnviar";
+            this.btnEnviar.Size = new System.Drawing.Size(91, 46);
+            this.btnEnviar.TabIndex = 14;
+            this.btnEnviar.Text = "Enviar";
+            this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
+            // 
+            // chkModificar
+            // 
+            this.chkModificar.AutoSize = true;
+            this.chkModificar.Location = new System.Drawing.Point(289, 261);
+            this.chkModificar.Name = "chkModificar";
+            this.chkModificar.Size = new System.Drawing.Size(69, 17);
+            this.chkModificar.TabIndex = 15;
+            this.chkModificar.Text = "Modificar";
+            this.chkModificar.UseVisualStyleBackColor = true;
+            this.chkModificar.CheckedChanged += new System.EventHandler(this.chkModificar_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 373);
+            this.Controls.Add(this.chkModificar);
+            this.Controls.Add(this.btnEnviar);
+            this.Controls.Add(this.txtEstado);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtTimeoutCarga);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtTiempoGiro);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtTemperatura);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.rtfTerminal);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.lblSend);
@@ -180,6 +287,16 @@
         private System.Windows.Forms.Label lblSend;
         private System.Windows.Forms.TextBox txtSendData;
         private System.Windows.Forms.RichTextBox rtfTerminal;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtTemperatura;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtTiempoGiro;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtTimeoutCarga;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtEstado;
+        private System.Windows.Forms.Button btnEnviar;
+        private System.Windows.Forms.CheckBox chkModificar;
     }
 }
 
