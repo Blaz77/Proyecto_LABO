@@ -6,7 +6,7 @@ Compiler=PCM
 [Target Data]
 FileList=build\default\production\src\main.c
 [Directories]
-Include=C:\Program Files (x86)\PICC\Devices\
+Include=C:\Program Files (x86)\PICC\Devices\;D:\Proyecto_LABO\Firmware\Lavadora.X\src\;C:\Program Files (x86)\PICC\Drivers\
 [build\default\production\src\main.c]
 Type=4
 [mru-list]

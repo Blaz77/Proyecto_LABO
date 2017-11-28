@@ -26,7 +26,7 @@ namespace InterfazLavadora
         {
             get
             {
-                return DataMode.Text;
+                return DataMode.Hex;
             }
         }
 

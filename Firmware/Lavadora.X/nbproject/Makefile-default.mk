@@ -98,11 +98,11 @@ ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/src 
 ifeq (1,1) 
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  out="${OBJECTDIR}\src"  src/main.c +FM +DF +CC  #__DEBUG=1 +ICD +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 
+	${MP_CC}  out="${OBJECTDIR}\src"  src/main.c +FM +DF +CC  #__DEBUG=1 +ICD +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" I+="src" I+="C:\Program Files (x86)\PICC\Drivers" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 
 	@mv ${OBJECTDIR}/src/main.cof "dist/${CND_CONF}/${IMAGE_TYPE}/Lavadora.X.${IMAGE_TYPE}.cof" 
 	@mv ${OBJECTDIR}/src/main.hex "dist/${CND_CONF}/${IMAGE_TYPE}/Lavadora.X.${IMAGE_TYPE}.hex"
 else 
-	${MP_CC}  out=""${OBJECTDIR}\src"" src/main.c +EXPORT +FM +DF +CC  #__DEBUG=1 +ICD +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 +EXPORTD="${OBJECTDIR}/src"  
+	${MP_CC}  out=""${OBJECTDIR}\src"" src/main.c +EXPORT +FM +DF +CC  #__DEBUG=1 +ICD +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" I+="src" I+="C:\Program Files (x86)\PICC\Drivers" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 +EXPORTD="${OBJECTDIR}/src"  
 	
 endif 
 	
@@ -111,11 +111,11 @@ ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/src 
 ifeq (1,1) 
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  out="${OBJECTDIR}\src"  src/main.c +FM +DF +CC +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 
+	${MP_CC}  out="${OBJECTDIR}\src"  src/main.c +FM +DF +CC +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" I+="src" I+="C:\Program Files (x86)\PICC\Drivers" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 
 	@mv ${OBJECTDIR}/src/main.cof "dist/${CND_CONF}/${IMAGE_TYPE}/Lavadora.X.${IMAGE_TYPE}.cof" 
 	@mv ${OBJECTDIR}/src/main.hex "dist/${CND_CONF}/${IMAGE_TYPE}/Lavadora.X.${IMAGE_TYPE}.hex"
 else 
-	${MP_CC}  out=""${OBJECTDIR}\src"" src/main.c +EXPORT +FM +DF +CC +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 +EXPORTD="${OBJECTDIR}/src"  
+	${MP_CC}  out=""${OBJECTDIR}\src"" src/main.c +EXPORT +FM +DF +CC +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" I+="src" I+="C:\Program Files (x86)\PICC\Drivers" +DF +LN +T +A +M +J +EA +Z -P #__16F628A=1 +EXPORTD="${OBJECTDIR}/src"  
 	
 endif 
 	
@@ -129,7 +129,7 @@ dist/${CND_CONF}/${IMAGE_TYPE}/Lavadora.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJE
 ifeq (1,1) 
 	
 else 
-	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Lavadora.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/src/main.o +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" +DF +LN +T +A +M +J +EA +Z -P
+	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Lavadora.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/src/main.o +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" I+="src" I+="C:\Program Files (x86)\PICC\Drivers" +DF +LN +T +A +M +J +EA +Z -P
 	
 endif 
 	
@@ -139,7 +139,7 @@ dist/${CND_CONF}/${IMAGE_TYPE}/Lavadora.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJE
 ifeq (1,1) 
 	
 else 
-	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Lavadora.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/src/main.o +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" +DF +LN +T +A +M +J +EA +Z -P
+	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Lavadora.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/src/main.o +Y=9 +EA I+="C:\Program Files (x86)\PICC\Devices" I+="src" I+="C:\Program Files (x86)\PICC\Drivers" +DF +LN +T +A +M +J +EA +Z -P
 	
 endif 
 	

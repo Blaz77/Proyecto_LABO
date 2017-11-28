@@ -7,6 +7,9 @@
 
 #include <main.h>
 
+#include <1wire.c>
+#include <ds1820.c>
+
 // Variables de estado
  short est_resetalarma = IN_OFF;
  short est_nivel_min = IN_OFF;
@@ -21,7 +24,8 @@
  short reset_tiempo = FALSE;
  int segundos = 0, minutos = 0;
  int ciclos_hechos = 0;
-
+ int in_data[2];
+ int out_data[4];
 
 void ScanEntradas()
 {
@@ -345,7 +349,13 @@ void main()
             delay_ms(150);
         }
         else {
-            putc('A');
+            out_data[O_TEMPERATURA] = 40;
+            out_data[O_ESTADO] = 2;
+            out_data[O_T_CARGA] = 180;
+            out_data[O_T_GIRO] = 10;
+            for (int i=0; i<4; i++) {
+                putc(out_data[i]);
+            }
             delay_ms(999);
             if (reset_tiempo) {
                 ResetTiempos();

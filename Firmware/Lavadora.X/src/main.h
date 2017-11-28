@@ -9,6 +9,7 @@
 #define MAIN_H*/
 
 #include <16F628A.h>
+#include <STDLIB.H>
 
 #FUSES NOWDT                    //No Watch Dog Timer
 #FUSES NOPUT                      //Power Up Timer
@@ -75,4 +76,11 @@ enum etapaGiro {
     GIRO_HORARIO, DESACEL_HOR, GIRO_ANTIHOR, DESACEL_ANTIHOR
 };
 
+enum outData {
+    O_TEMPERATURA, O_T_CARGA, O_T_GIRO, O_ESTADO
+};
+
+enum inData {
+    I_T_CARGA, I_T_GIRO
+};
 //#endif  // MAIN_H
