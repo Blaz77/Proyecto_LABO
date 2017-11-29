@@ -49,6 +49,12 @@
             this.txtEstado = new System.Windows.Forms.TextBox();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.chkModificar = new System.Windows.Forms.CheckBox();
+            this.picCaliente = new System.Windows.Forms.PictureBox();
+            this.picOk = new System.Windows.Forms.PictureBox();
+            this.picFrio = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picCaliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOk)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFrio)).BeginInit();
             this.SuspendLayout();
             // 
             // tmrCheckComPorts
@@ -77,9 +83,9 @@
             this.lblComPort.AutoSize = true;
             this.lblComPort.Location = new System.Drawing.Point(17, 20);
             this.lblComPort.Name = "lblComPort";
-            this.lblComPort.Size = new System.Drawing.Size(56, 13);
+            this.lblComPort.Size = new System.Drawing.Size(38, 13);
             this.lblComPort.TabIndex = 2;
-            this.lblComPort.Text = "COM Port:";
+            this.lblComPort.Text = "Puerto";
             // 
             // cmbBaudRate
             // 
@@ -103,64 +109,62 @@
             this.lblBaudRate.AutoSize = true;
             this.lblBaudRate.Location = new System.Drawing.Point(105, 20);
             this.lblBaudRate.Name = "lblBaudRate";
-            this.lblBaudRate.Size = new System.Drawing.Size(61, 13);
+            this.lblBaudRate.Size = new System.Drawing.Size(54, 13);
             this.lblBaudRate.TabIndex = 4;
-            this.lblBaudRate.Text = "Baud Rate:";
+            this.lblBaudRate.Text = "Velocidad";
             // 
             // btnOpenPort
             // 
-            this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(330, 34);
+            this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenPort.Location = new System.Drawing.Point(404, 34);
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPort.TabIndex = 7;
-            this.btnOpenPort.Text = "&Open Port";
+            this.btnOpenPort.Text = "Abrir puerto";
             this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
             // 
             // btnSend
             // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(330, 94);
+            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSend.Location = new System.Drawing.Point(406, 253);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.Size = new System.Drawing.Size(73, 23);
             this.btnSend.TabIndex = 10;
-            this.btnSend.Text = "Send";
+            this.btnSend.Text = "Enviar";
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // lblSend
             // 
-            this.lblSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSend.AutoSize = true;
-            this.lblSend.Location = new System.Drawing.Point(17, 99);
+            this.lblSend.Location = new System.Drawing.Point(17, 258);
             this.lblSend.Name = "lblSend";
-            this.lblSend.Size = new System.Drawing.Size(61, 13);
+            this.lblSend.Size = new System.Drawing.Size(69, 13);
             this.lblSend.TabIndex = 8;
-            this.lblSend.Text = "Send &Data:";
+            this.lblSend.Text = "Enviar datos:";
             // 
             // txtSendData
             // 
-            this.txtSendData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSendData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSendData.Location = new System.Drawing.Point(86, 96);
+            this.txtSendData.Location = new System.Drawing.Point(86, 255);
             this.txtSendData.Name = "txtSendData";
-            this.txtSendData.Size = new System.Drawing.Size(238, 20);
+            this.txtSendData.Size = new System.Drawing.Size(312, 20);
             this.txtSendData.TabIndex = 9;
             // 
             // rtfTerminal
             // 
-            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtfTerminal.Location = new System.Drawing.Point(12, 145);
+            this.rtfTerminal.Location = new System.Drawing.Point(12, 292);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(393, 68);
+            this.rtfTerminal.Size = new System.Drawing.Size(467, 59);
             this.rtfTerminal.TabIndex = 11;
             this.rtfTerminal.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 239);
+            this.label1.Location = new System.Drawing.Point(23, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 12;
@@ -168,16 +172,18 @@
             // 
             // txtTemperatura
             // 
+            this.txtTemperatura.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTemperatura.Enabled = false;
-            this.txtTemperatura.Location = new System.Drawing.Point(157, 236);
+            this.txtTemperatura.Location = new System.Drawing.Point(142, 85);
             this.txtTemperatura.Name = "txtTemperatura";
-            this.txtTemperatura.Size = new System.Drawing.Size(112, 20);
+            this.txtTemperatura.Size = new System.Drawing.Size(219, 20);
             this.txtTemperatura.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 265);
+            this.label2.Location = new System.Drawing.Point(23, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 12;
@@ -185,15 +191,18 @@
             // 
             // txtTiempoGiro
             // 
-            this.txtTiempoGiro.Location = new System.Drawing.Point(157, 262);
+            this.txtTiempoGiro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTiempoGiro.Enabled = false;
+            this.txtTiempoGiro.Location = new System.Drawing.Point(142, 111);
             this.txtTiempoGiro.Name = "txtTiempoGiro";
-            this.txtTiempoGiro.Size = new System.Drawing.Size(112, 20);
+            this.txtTiempoGiro.Size = new System.Drawing.Size(219, 20);
             this.txtTiempoGiro.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 291);
+            this.label3.Location = new System.Drawing.Point(23, 140);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 12;
@@ -201,15 +210,18 @@
             // 
             // txtTimeoutCarga
             // 
-            this.txtTimeoutCarga.Location = new System.Drawing.Point(157, 288);
+            this.txtTimeoutCarga.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTimeoutCarga.Enabled = false;
+            this.txtTimeoutCarga.Location = new System.Drawing.Point(142, 137);
             this.txtTimeoutCarga.Name = "txtTimeoutCarga";
-            this.txtTimeoutCarga.Size = new System.Drawing.Size(112, 20);
+            this.txtTimeoutCarga.Size = new System.Drawing.Size(219, 20);
             this.txtTimeoutCarga.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 317);
+            this.label4.Location = new System.Drawing.Point(23, 166);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 12;
@@ -217,17 +229,20 @@
             // 
             // txtEstado
             // 
+            this.txtEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEstado.Enabled = false;
-            this.txtEstado.Location = new System.Drawing.Point(157, 314);
+            this.txtEstado.Location = new System.Drawing.Point(142, 163);
             this.txtEstado.Name = "txtEstado";
-            this.txtEstado.Size = new System.Drawing.Size(112, 20);
+            this.txtEstado.Size = new System.Drawing.Size(219, 20);
             this.txtEstado.TabIndex = 13;
             // 
             // btnEnviar
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(289, 288);
+            this.btnEnviar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEnviar.Location = new System.Drawing.Point(388, 151);
             this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(91, 46);
+            this.btnEnviar.Size = new System.Drawing.Size(91, 32);
             this.btnEnviar.TabIndex = 14;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
@@ -235,8 +250,9 @@
             // 
             // chkModificar
             // 
+            this.chkModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkModificar.AutoSize = true;
-            this.chkModificar.Location = new System.Drawing.Point(289, 261);
+            this.chkModificar.Location = new System.Drawing.Point(388, 128);
             this.chkModificar.Name = "chkModificar";
             this.chkModificar.Size = new System.Drawing.Size(69, 17);
             this.chkModificar.TabIndex = 15;
@@ -244,11 +260,47 @@
             this.chkModificar.UseVisualStyleBackColor = true;
             this.chkModificar.CheckedChanged += new System.EventHandler(this.chkModificar_CheckedChanged);
             // 
+            // picCaliente
+            // 
+            this.picCaliente.Image = global::InterfazLavadora.Properties.Resources.caliente;
+            this.picCaliente.Location = new System.Drawing.Point(426, 87);
+            this.picCaliente.Name = "picCaliente";
+            this.picCaliente.Size = new System.Drawing.Size(32, 30);
+            this.picCaliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picCaliente.TabIndex = 18;
+            this.picCaliente.TabStop = false;
+            this.picCaliente.Visible = false;
+            // 
+            // picOk
+            // 
+            this.picOk.Image = global::InterfazLavadora.Properties.Resources.ok;
+            this.picOk.Location = new System.Drawing.Point(404, 85);
+            this.picOk.Name = "picOk";
+            this.picOk.Size = new System.Drawing.Size(32, 32);
+            this.picOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picOk.TabIndex = 17;
+            this.picOk.TabStop = false;
+            this.picOk.Visible = false;
+            // 
+            // picFrio
+            // 
+            this.picFrio.Image = global::InterfazLavadora.Properties.Resources.frio;
+            this.picFrio.Location = new System.Drawing.Point(388, 85);
+            this.picFrio.Name = "picFrio";
+            this.picFrio.Size = new System.Drawing.Size(32, 32);
+            this.picFrio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picFrio.TabIndex = 16;
+            this.picFrio.TabStop = false;
+            this.picFrio.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 373);
+            this.ClientSize = new System.Drawing.Size(491, 210);
+            this.Controls.Add(this.picCaliente);
+            this.Controls.Add(this.picOk);
+            this.Controls.Add(this.picFrio);
             this.Controls.Add(this.chkModificar);
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.txtEstado);
@@ -269,7 +321,10 @@
             this.Controls.Add(this.cmbPortName);
             this.Controls.Add(this.lblComPort);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Controlador de lavadora";
+            ((System.ComponentModel.ISupportInitialize)(this.picCaliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFrio)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,6 +352,9 @@
         private System.Windows.Forms.TextBox txtEstado;
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.CheckBox chkModificar;
+        private System.Windows.Forms.PictureBox picFrio;
+        private System.Windows.Forms.PictureBox picOk;
+        private System.Windows.Forms.PictureBox picCaliente;
     }
 }
 

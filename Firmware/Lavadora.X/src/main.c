@@ -30,6 +30,7 @@ int CARGA_TIMEOUT = 1;		// minutos
  int ciclos_hechos = 0;
  int in_data[2];
  int out_data[4];
+ int temperatura = TEMPERATURA_SET;
 
 void ScanEntradas()
 {
@@ -356,14 +357,19 @@ void main()
             delay_ms(150);
         }
         else {
-            out_data[O_TEMPERATURA] = ds1820_read;
+            temperatura = ds1820_read();
+            if (temperatura < 30) 
+                output_bit(S_CALENTADOR, OUT_ON);
+            else
+                output_bit(S_CALENTADOR, OUT_OFF);
+            out_data[O_TEMPERATURA] = temperatura;
             out_data[O_ESTADO] = etapa;
             out_data[O_T_CARGA] = CARGA_TIMEOUT;
             out_data[O_T_GIRO] = TIEMPO_GIRO;
             for (int i=0; i<4; i++) {
                 putc(out_data[i]);
             }
-            delay_ms(999);
+            delay_ms(899);
             if (reset_tiempo) {
                 ResetTiempos();
                 reset_tiempo = FALSE;

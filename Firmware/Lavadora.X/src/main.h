@@ -59,11 +59,14 @@
 #define T_CENTRI_LAVADO 2       //minutos
 #define T_CENTRI_FINAL  4       //minutos
 #define PARADA_CENTRI   10      //segundos
+#define TEMPERATURA_SET 30      //grados
 
 #define EEPROM_TIEMPO_GIRO		0
 #define EEPROM_CARGA_TIMEOUT 	1
 
 #use rs232(baud=9600,parity=N,xmit=PIN_TXD,rcv=PIN_RXD,bits=8)
+
+#rom 0x2100 = { 3, 1 }
 
 enum tipoPrograma {
     EN_ESPERA, CICLO_NORMAL, CENTRIFUGADO

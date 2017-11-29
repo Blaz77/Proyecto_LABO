@@ -157,6 +157,10 @@ namespace InterfazLavadora
                 txtTiempoGiro.Text = buffer[1].ToString() + " segundos";
                 txtTimeoutCarga.Text = buffer[2].ToString() + " minutos";
                 txtEstado.Text = buffer[3].ToString();
+
+                picFrio.Visible = (buffer[0] < 24);
+                picCaliente.Visible = (buffer[0] > 35);
+                picOk.Visible = !picFrio.Visible && !picCaliente.Visible;
             }
         }
 
@@ -254,6 +258,7 @@ namespace InterfazLavadora
             EnEdicion = chkModificar.Checked;
             txtTiempoGiro.Enabled = EnEdicion;
             txtTimeoutCarga.Enabled = EnEdicion;
+            btnEnviar.Enabled = EnEdicion;
         }
     }
 }
