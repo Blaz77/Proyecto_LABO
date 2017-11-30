@@ -116,9 +116,9 @@
             // btnOpenPort
             // 
             this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(404, 34);
+            this.btnOpenPort.Location = new System.Drawing.Point(367, 34);
             this.btnOpenPort.Name = "btnOpenPort";
-            this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenPort.Size = new System.Drawing.Size(112, 23);
             this.btnOpenPort.TabIndex = 7;
             this.btnOpenPort.Text = "Abrir puerto";
             this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
@@ -240,12 +240,14 @@
             // btnEnviar
             // 
             this.btnEnviar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEnviar.Enabled = false;
             this.btnEnviar.Location = new System.Drawing.Point(388, 151);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(91, 32);
             this.btnEnviar.TabIndex = 14;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Visible = false;
             this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // chkModificar
@@ -258,6 +260,7 @@
             this.chkModificar.TabIndex = 15;
             this.chkModificar.Text = "Modificar";
             this.chkModificar.UseVisualStyleBackColor = true;
+            this.chkModificar.Visible = false;
             this.chkModificar.CheckedChanged += new System.EventHandler(this.chkModificar_CheckedChanged);
             // 
             // picCaliente
@@ -297,7 +300,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 210);
+            this.ClientSize = new System.Drawing.Size(491, 339);
             this.Controls.Add(this.picCaliente);
             this.Controls.Add(this.picOk);
             this.Controls.Add(this.picFrio);

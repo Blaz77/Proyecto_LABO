@@ -21,6 +21,8 @@ namespace InterfazLavadora
         private SerialPort comport = new SerialPort();
         private Color[] LogMsgTypeColor = { Color.Blue, Color.Green, Color.Black, Color.Orange, Color.Red };
         private bool EnEdicion;
+        private byte[] GenBuffer = new byte[5];
+        private int lastPos = 4;
 
         private DataMode CurrentDataMode
         {
@@ -58,8 +60,8 @@ namespace InterfazLavadora
         {
             txtSendData.Enabled = btnSend.Enabled = comport.IsOpen;
 
-            if (comport.IsOpen) btnOpenPort.Text = "&Close Port";
-            else btnOpenPort.Text = "&Open Port";
+            if (comport.IsOpen) btnOpenPort.Text = "&Cerrar puerto";
+            else btnOpenPort.Text = "Abrir puerto";
         }
 
         private void btnOpenPort_Click(object sender, EventArgs e)
@@ -143,24 +145,38 @@ namespace InterfazLavadora
 
                 comport.Read(buffer, 0, bytes);
 
+                int i = 0;
+                while (i < 5 && i < buffer.Count() )
+                {
+                    GenBuffer[0] = GenBuffer[1];
+                    GenBuffer[1] = GenBuffer[2];
+                    GenBuffer[2] = GenBuffer[3];
+                    GenBuffer[3] = GenBuffer[4];
+                    GenBuffer[4] = buffer[i];
+                    i++;
+                }
+
                 Log(LogMsgType.Incoming, ByteArrayToHexString(buffer));
                 if (!EnEdicion)
-                    FillData(buffer);
+                    FillData((byte[])GenBuffer.Clone());
             }
         }
 
         private void FillData(byte[] buffer)
         {
-            if (buffer.Count() == 4)
+            if (buffer.Count() == 5 && buffer[0] == 0xFE)
             {
-                txtTemperatura.Text = buffer[0].ToString() + " ºC";
-                txtTiempoGiro.Text = buffer[1].ToString() + " segundos";
-                txtTimeoutCarga.Text = buffer[2].ToString() + " minutos";
-                txtEstado.Text = buffer[3].ToString();
+                txtTemperatura.Invoke(new EventHandler(delegate
+                {
+                    txtTemperatura.Text = buffer[1].ToString() + " ºC";
+                    txtTiempoGiro.Text = buffer[2].ToString() + " segundos";
+                    txtTimeoutCarga.Text = buffer[3].ToString() + " minutos";
+                    txtEstado.Text = buffer[4].ToString();
 
-                picFrio.Visible = (buffer[0] < 24);
-                picCaliente.Visible = (buffer[0] > 35);
-                picOk.Visible = !picFrio.Visible && !picCaliente.Visible;
+                    picFrio.Visible = (buffer[1] < 24);
+                    picCaliente.Visible = (buffer[1] > 35);
+                    picOk.Visible = !picFrio.Visible && !picCaliente.Visible;
+                }));
             }
         }
 
@@ -250,7 +266,24 @@ namespace InterfazLavadora
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                byte[] data = new byte[3] { 0xFE, Convert.ToByte(txtTimeoutCarga.Text), Convert.ToByte(txtTiempoGiro.Text) };
 
+                comport.Write(data, 0, 3);
+
+                Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+
+                chkModificar.Checked = false;
+                EnEdicion = chkModificar.Checked;
+                txtTiempoGiro.Enabled = EnEdicion;
+                txtTimeoutCarga.Enabled = EnEdicion;
+                btnEnviar.Enabled = EnEdicion;
+            }
+            catch (FormatException)
+            {
+                Log(LogMsgType.Error, "Formato incorrecto: " + txtSendData.Text + "\n");
+            }
         }
 
         private void chkModificar_CheckedChanged(object sender, EventArgs e)

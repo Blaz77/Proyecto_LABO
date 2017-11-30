@@ -31,6 +31,8 @@ int CARGA_TIMEOUT = 1;		// minutos
  int in_data[2];
  int out_data[4];
  int temperatura = TEMPERATURA_SET;
+ int inBuffer_pos = 0;
+ char c;
 
 void ScanEntradas()
 {
@@ -79,6 +81,21 @@ void DefinirPrograma()
 void MantenerEspera()
 {
     output_bit(S_FIN, OUT_ON);
+    if (kbhit()) {
+        c = getc();
+        if (c = 0xFE) {
+            inBuffer_pos = 0;
+        }
+        else {
+            in_data[inBuffer_pos] = c;
+            inBuffer_pos++;
+        }
+        if (inBuffer_pos == 2) {
+            write_eeprom(EEPROM_CARGA_TIMEOUT, in_data[I_T_CARGA]);
+            write_eeprom(EEPROM_TIEMPO_GIRO, in_data[I_T_GIRO]);
+            inBuffer_pos=0;
+        }
+    }
 }
 
 void EjecutarGiros()
@@ -366,6 +383,7 @@ void main()
             out_data[O_ESTADO] = etapa;
             out_data[O_T_CARGA] = CARGA_TIMEOUT;
             out_data[O_T_GIRO] = TIEMPO_GIRO;
+            putc(0xFE);
             for (int i=0; i<4; i++) {
                 putc(out_data[i]);
             }
